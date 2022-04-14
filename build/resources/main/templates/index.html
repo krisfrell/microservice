@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="/main.js"></script>
+
+    <link href="css/mobiscroll.jquery.min.css" rel="stylesheet"/>
+    <script src="js/mobiscroll.jquery.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <a id="appointments">Show appointments</a>
+    <a href="/logout">Logout</a>
+    <a id="remove">Remove appointments</a>
+    <form id="form" action="/appointment" method="post">
+        <div class="row">
+            <table class="table table-bordered table-striped" id="table-salon">
+                <thead>
+                <tr>
+                    <th>Choose salon:</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <table class="table table-bordered table-striped" id="table-service">
+                <thead>
+                <tr>
+                    <th>Choose service:</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <table class="table table-bordered table-striped" id="table-master">
+                <thead>
+                <tr>
+                    <th>Choose master:</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" id="calendar-row">
+            <input id="calendar" placeholder="Please select..."/>
+        </div>
+
+        <input id="submit" class="btn btn-success" value="Create an appointment"/>
+
+        <div id="success" align="center"></div>
+
+        <div class="row">
+            <table class="table table-bordered table-striped" id="table-upcoming">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <table class="table table-bordered table-striped" id="table-past">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
