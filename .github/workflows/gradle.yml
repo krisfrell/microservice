@@ -18,10 +18,11 @@ jobs:
       with:
         java-version: 17.0.1+12
         distribution: 'temurin'
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew        
     - name: Build with Gradle
       run: ./gradlew bootRun
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+
       
   test:
   
@@ -32,7 +33,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17.0.1+12
-      - name: Run unit tests
-        run: ./gradlew test
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+      - name: Run unit tests
+        run: ./gradlew test
