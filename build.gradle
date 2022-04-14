@@ -7,6 +7,8 @@ plugins {
 group 'org.example'
 version '1.0-SNAPSHOT'
 
+mainClassName = 'Application'
+
 repositories {
     mavenCentral()
 }
@@ -30,4 +32,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Application'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
 }
