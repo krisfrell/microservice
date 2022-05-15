@@ -28,8 +28,6 @@ jobs:
       with:
         name: artifact
         path: build/libs/*.jar
-    - name: Create jar
-      run: java -jar build/libs/*.jar
   
   
   docker-image:
