@@ -44,12 +44,8 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Download artifact
         uses: actions/download-artifact@v2
-      - name: a
-        run: pwd
-      - name: b
-        run: ls -la /home/runner/work/microservice/microservice/artifact
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=/home/runner/work/microservice/microservice/artifact . --file Dockerfile -t app
+        run: docker build --build-arg JAR_FILE=artifact/microservice-1.0-SNAPSHOT-boot.jar . --file Dockerfile -t app
       - name: Run postgres
         run: docker run -d -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=salon --name postgres -h postgres postgres
       - name: Run app
