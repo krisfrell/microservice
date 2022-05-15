@@ -23,8 +23,27 @@ jobs:
     - name: Clean
       run: ./gradlew clean build -x jar
     - name: Build with Gradle
-      run: ./gradlew bootJar
-
+      run: ./gradlew build && java -jar build/libs/app.jar
+  
+  
+  docker-image:
+  
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login to docker
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build docker image
+        run: docker build --build-arg JAR_FILE=build/libs/*.jar . --file Dockerfile -t app
+      - name: Run postgres
+        run: docker run -d -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=salon --name postgres -h postgres postgres
+      - name: Run app
+        run: docker run -p 8200:8200 --name app --link postgres app
+        
       
   test:
   
