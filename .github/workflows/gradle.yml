@@ -42,6 +42,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Download artifact
+        uses: actions/download-artifact@v2
       - name: Build docker image
         run: docker build --build-arg JAR_FILE=build/libs/*.jar . --file Dockerfile -t app
       - name: Run postgres
