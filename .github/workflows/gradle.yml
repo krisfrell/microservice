@@ -28,6 +28,7 @@ jobs:
   
   docker-image:
   
+    needs: build
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout
