@@ -45,7 +45,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
       - name: Build docker image
-        run: docker build --build-arg JAR_FILE=build/libs/*.jar . --file Dockerfile -t app
+        run: docker build --build-arg JAR_FILE=/home/runner/work/microservice/microservice/artifact . --file Dockerfile -t app
       - name: Run postgres
         run: docker run -d -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=salon --name postgres -h postgres postgres
       - name: Run app
