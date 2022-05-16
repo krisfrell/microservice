@@ -18,16 +18,6 @@ jobs:
       with:
         java-version: 17.0.1+12
         distribution: 'temurin'
-    - name: Make gradlew executable
-      run: chmod +x gradlew  
-    - name: Clean
-      run: ./gradlew clean build -x jar
-#     - name: Build with Gradle
-#       run: ./gradlew build
-#     - uses: actions/upload-artifact@v2
-#       with:
-#         name: artifact
-#         path: build/libs/*.jar
   
   
   docker-image:
@@ -42,11 +32,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-#       - name: Download artifact
-#         uses: actions/download-artifact@v2
       - name: Build docker image
         run: docker build . --file Dockerfile -t app
-#         run: docker build --build-arg JAR_FILE=artifact/microservice-1.0-SNAPSHOT-boot.jar . --file Dockerfile -t app
       - name: Run postgres
         run: docker run -d -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=salon --name postgres -h postgres postgres
       - name: Run app
