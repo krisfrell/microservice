@@ -1,0 +1,17 @@
+global:
+  scrape_interval:     15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'spring-actuator'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    basic_auth:
+      username: 'test@test.t'
+      password: '12345'
+    static_configs:
+      - targets: ['docker.for.win.localhost:8300']
