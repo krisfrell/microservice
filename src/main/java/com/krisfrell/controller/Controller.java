@@ -3,10 +3,14 @@ package com.krisfrell.controller;
 import com.google.gson.Gson;
 import com.krisfrell.entity.*;
 import com.krisfrell.repository.*;
+import com.krisfrell.service.MetricService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 @RestController
@@ -25,6 +29,12 @@ public class Controller {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MetricService metricService;
+
+    @Autowired
+    private BuildProperties buildProperties;
 
     @GetMapping("/salon")
     public List<Salon> getSalons() {
@@ -111,5 +121,16 @@ public class Controller {
     @DeleteMapping("/remove/{id}")
     public void removeAppointment(@PathVariable("id") long id) {
         appointmentRepository.deleteById(id);
+    }
+
+    @GetMapping("/stats")
+    public Map<String, String> getStatistics() {
+        String version = buildProperties.getVersion();
+        ZonedDateTime dateTime = buildProperties.getTime().atZone(ZoneId.of("GMT+3"));
+        Map<String, String> metrics = new HashMap<>();
+        metrics.put("Version:", version);
+        metrics.put("Requests:" ,metricService.getFullMetric().toString());
+        metrics.put("Startup time:  ", dateTime.toString());
+        return metrics;
     }
 }
