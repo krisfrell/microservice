@@ -32,6 +32,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Make gradlew executable
+        run: chmod +x gradlew  
       - name: Refresh versions
         run: ./gradlew refreshVersions
       - name: Build docker image
